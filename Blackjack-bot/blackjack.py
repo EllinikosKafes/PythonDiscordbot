@@ -27,25 +27,13 @@ class Card:
         if card == 0:
             return "A"
         elif card < 10:
-            return str(card)
+            return str(card + 1)
         elif card == 10:
             return "J"
         elif card == 11:
             return "Q"
         elif card == 12:
             return "K"
-    
-    @staticmethod
-    def print_face_down() -> None:
-        card = (
-            "┌─────────┐\n"
-            "│░░░░░░░░░│\n"
-            "│░░░░░░░░░│\n"
-            "│░░░░░░░░░│\n"
-            "│░░░░░░░░░│\n"
-            "│░░░░░░░░░│\n"
-            "└─────────┘"
-        )
     
     @staticmethod
     def print(cards: tuple, is_dealer: bool) -> str:
@@ -83,29 +71,32 @@ class Card:
             lines[6] += bot
         
         return "\n".join(lines)
-            
-
-        
-
 
 
 class Deck:
     def __init__(self):
         self.cards = list(range(1, 53))
+        self.shuffle()
 
     def shuffle(self):
         random.shuffle(self.cards)
     
     def draw(self):
         return self.cards.pop()
-
-    @staticmethod
-    def display_card(cards: tuple) -> None:
-        pass
+        
+    def is_time_to_shuffle(self):
+        if len(self.cards) > 10:
+            return
+        self.cards = list(range(1, 53))
+        self.shuffle()
 
 class Session:
     def __init__(self):
-        return
+        self.state = 0
+        self.deck = Deck()
+        self.score = 0
+        self.dealer = None
+        self.player = None
 
 if __name__ == '__main__':
     Card.print((10, 28), True)

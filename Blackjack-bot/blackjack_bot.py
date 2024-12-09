@@ -9,7 +9,7 @@ from bj_commands import setup_commands
 intents = discord.Intents.default()
 intents.message_content = True
 
-bot = commands.Bot(command_prefix='$', intents=intents)
+bot = commands.Bot(command_prefix='$', intents=intents, help_command=None)
 setup_commands(bot)
 
 if __name__ == '__main__':
